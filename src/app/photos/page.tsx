@@ -46,8 +46,7 @@ export default function Home() {
         </nav>
       </header>
 
-      <main className="p-8">
-        <h2 className="text-2xl mb-4">系上相簿</h2>
+      <main className="content">
         {loading && <p>載入中...</p>}
         {error && <p className="text-red-500">錯誤：{error}</p>}
         {!loading && !error && (
@@ -55,9 +54,9 @@ export default function Home() {
             {imageUrls.map((url) => (
               <div
                 key={url}
-                className="relative w-full h-48 overflow-hidden rounded shadow"
+                className="flex items-center justify-center overflow-hidden rounded shadow"
               >
-                <Image src={url} alt="Drive Photo" width={0} height={0} sizes="100vw" style={{ width: '30%', height: 'auto' }}/>
+                <Image src={url} alt="Drive Photo" width={0} height={0} sizes="100vw" style={{ width: '50%', height: 'auto' }} />
               </div>
             ))}
           </div>

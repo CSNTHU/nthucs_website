@@ -4,7 +4,7 @@ import Link from "next/link";
 
 
 export default function Home() {
-  
+
 
   return (
     <div>
@@ -26,9 +26,15 @@ export default function Home() {
       </header>
 
       {/* 主內容區 */}
-      <main>
-        <p>...</p>
+      <main className="content">
+        {/* 例外：把這行標題整個置中，字級放大 */}
+        <div className="text-center mb-4">
+          <Link href="https://drive.google.com/drive/folders/…" className="text-2xl hover:text-[#98AFC7]">
+            考古題
+          </Link>
+        </div>
       </main>
+
     </div>
   );
 }

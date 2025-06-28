@@ -8,11 +8,12 @@
 
 /* 3. 自訂全域變數與樣式 */
 :root {
-  --banner-bg:      #9090C0;
-  --banner-text:    #E7DADA;
-  --body-bg:        #E7DADA;
-  --body-text:      #4D4D5C;
-  --font-size-base: 16px;       /* 全站基本字體大小，可調整 */
+  --banner-bg: #9090C0;
+  --banner-text: #E7DADA;
+  --body-bg: #E7DADA;
+  --body-text: #4D4D5C;
+  --font-size-base: 16px;
+  /* 全站基本字體大小，可調整 */
 }
 
 /* 深色模式 override：維持與淺色一致 (移除差異設定) */
@@ -30,15 +31,20 @@ body {
   color: var(--body-text);
   margin: 0;
   line-height: 1.6;
+  text-align: center;
 }
 
 /* 直接針對 <header> 套用 Tailwind utilities */
 header {
   /* 80px 高度 */
-  height: 5rem;          /* = h-20 */
-  display: flex;         /* = flex */
-  align-items: center;   /* = items-center */
-  padding-left: 2rem;    /* = px-8 */
+  height: 5rem;
+  /* = h-20 */
+  display: flex;
+  /* = flex */
+  align-items: center;
+  /* = items-center */
+  padding-left: 2rem;
+  /* = px-8 */
   padding-right: 2rem;
   background-color: var(--banner-bg);
   color: var(--banner-text);
@@ -46,9 +52,27 @@ header {
 }
 
 header nav {
-  display: flex;       /* flex container */
-  margin-left: auto;   /* 推到最右 */
-  gap: 1.5rem;         /* 在每個項目間產生 24px 間距 */
+  display: flex;
+  /* flex container */
+  margin-left: auto;
+  /* 推到最右 */
+  gap: 1.5rem;
+  /* 在每個項目間產生 24px 間距 */
+}
+
+.content {
+  max-width: 960px;
+  /* 視需求可改 800 / 1024 / 1280px */
+  margin-inline: auto;
+  /* 等同 Tailwind 的 mx-auto */
+  padding-inline: 1rem;
+  /* 等同 px-4，防止貼邊 */
+  text-align: left;
+  /* 強制區塊內文字靠左 */
+}
+
+.content p {
+  text-indent: 2ch;
 }
 
 /* 4. Tailwind 的全部 utility classes */
