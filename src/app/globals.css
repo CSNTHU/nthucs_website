@@ -1,26 +1,49 @@
-@import "tailwindcss";
+/* styles/global.css */
 
+/* 1. 字體載入 */
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap');
+
+/* 2. Tailwind 的 reset (= base) */
+@import "tailwindcss/preflight";
+
+/* 3. 自訂全域變數與樣式 */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --banner-bg:      #9090C0;
+  --banner-text:    #E7DADA;
+  --body-bg:        #E7DADA;
+  --body-text:      #4D4D5C;
+  --font-size-base: 16px;       /* 全站基本字體大小，可調整 */
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
+/* 深色模式 override：維持與淺色一致 (移除差異設定) */
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    /* 使用與淺色模式相同的變數 */
   }
 }
 
+/* 全站背景／文字／字體／字體大小 */
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Fira Code', monospace;
+  font-size: var(--font-size-base);
+  background-color: var(--body-bg);
+  color: var(--body-text);
+  margin: 0;
+  line-height: 1.6;
 }
+
+/* 直接針對 <header> 套用 Tailwind utilities */
+header {
+  /* 80px 高度 */
+  height: 5rem;          /* = h-20 */
+  display: flex;         /* = flex */
+  align-items: center;   /* = items-center */
+  padding-left: 2rem;    /* = px-8 */
+  padding-right: 2rem;
+  background-color: var(--banner-bg);
+  color: var(--banner-text);
+  font-size: 36px;
+}
+
+/* 4. Tailwind 的全部 utility classes */
+@import "tailwindcss/utilities";
