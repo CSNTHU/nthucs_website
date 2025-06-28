@@ -32,6 +32,9 @@ export default function Home() {
           <Link href="https://drive.google.com/drive/folders/1zoRayCwbnTJIZ_WJSXRyR0Z5-BThec8X" className="text-2xl hover:text-[#98AFC7]">
             <h2 className="title">考古題</h2>
           </Link>
+          <Link href="https://drive.google.com/drive/folders/18vDpt9ejvJYWIWJSXIQxbqu_bOg_MrG1" className="text-2xl hover:text-[#98AFC7]">
+            <h2 className="title">考古題(電機)</h2>
+          </Link>
         </div>
       </main>
     </div>
