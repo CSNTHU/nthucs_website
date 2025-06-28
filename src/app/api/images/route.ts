@@ -1,49 +1,61 @@
 // app/api/images/route.ts
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
-export async function GET(request: Request) {
-    try {
-        const { searchParams } = new URL(request.url);
-        const folderId = searchParams.get('folderId')
-            || process.env.NEXT_PUBLIC_DRIVE_FOLDER_ID!;
-        const apiKey = process.env.GOOGLE_API_KEY!;
+/** Google Drive v3 /files 回傳的單一檔案 */
+interface DriveFile {
+  id: string;
+  name: string;
+  mimeType: string;
+}
 
-        if (!folderId || !apiKey) {
-            return NextResponse.json(
-                { error: 'Missing folderId or API key' },
-                { status: 400 }
-            );
-        }
+/** Google Drive v3 /files 回傳的 JSON 物件 */
+interface DriveListResponse {
+  files: DriveFile[];
+}
 
-        // 列出檔案 ID
-        const listUrl =
-            `https://www.googleapis.com/drive/v3/files` +
-            `?q='${folderId}'+in+parents` +
-            `&key=${apiKey}` +
-            `&supportsAllDrives=true` +
-            `&includeItemsFromAllDrives=true` +
-            `&fields=files(id,name,mimeType)`;
+export async function GET(req: NextRequest) {
+  try {
+    const { searchParams } = new URL(req.url);
+    const folderId =
+      searchParams.get('folderId') ?? process.env.NEXT_PUBLIC_DRIVE_FOLDER_ID;
+    const apiKey = process.env.GOOGLE_API_KEY;
 
-        const listRes = await fetch(listUrl);
-        if (!listRes.ok) {
-            const err = await listRes.text();
-            return NextResponse.json({ error: err }, { status: listRes.status });
-        }
-        const { files } = await listRes.json() as { files: any[] };
-
-        // 針對每個檔案產生 alt=media 端點 URL
-        const images = files
-            .filter(f => f.mimeType.startsWith('image/'))
-            .map(f =>
-                `https://www.googleapis.com/drive/v3/files/${f.id}` +
-                `?alt=media&key=${apiKey}`
-            );
-
-        return NextResponse.json({ images });
-    } catch (e: any) {
-        return NextResponse.json(
-            { error: e.message || 'Unknown error' },
-            { status: 500 }
-        );
+    if (!folderId || !apiKey) {
+      return NextResponse.json(
+        { error: 'Missing folderId or API key' },
+        { status: 400 },
+      );
     }
+
+    /* 列出檔案 */
+    const listUrl =
+      'https://www.googleapis.com/drive/v3/files' +
+      `?q='${folderId}'+in+parents` +
+      `&key=${apiKey}` +
+      '&supportsAllDrives=true' +
+      '&includeItemsFromAllDrives=true' +
+      '&fields=files(id,name,mimeType)';
+
+    const listRes = await fetch(listUrl);
+
+    if (!listRes.ok) {
+      const errText = await listRes.text();
+      return NextResponse.json({ error: errText }, { status: listRes.status });
+    }
+
+    const { files }: DriveListResponse = (await listRes.json()) as DriveListResponse;
+
+    const images = files
+      .filter((f) => f.mimeType.startsWith('image/'))
+      .map(
+        (f) =>
+          `https://www.googleapis.com/drive/v3/files/${f.id}?alt=media&key=${apiKey}`,
+      );
+
+    return NextResponse.json({ images });
+  } catch (e: unknown) {
+    const message =
+      e instanceof Error ? e.message : 'Unknown error';
+    return NextResponse.json({ error: message }, { status: 500 });
+  }
 }
