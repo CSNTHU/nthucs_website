@@ -75,5 +75,10 @@ header nav {
   text-indent: 2ch;
 }
 
+.content .title {
+  font-size: 36px;
+}
+
+
 /* 4. Tailwind 的全部 utility classes */
 @import "tailwindcss/utilities";

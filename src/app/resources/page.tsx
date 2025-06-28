@@ -30,11 +30,10 @@ export default function Home() {
         {/* 例外：把這行標題整個置中，字級放大 */}
         <div className="text-center mb-4">
           <Link href="https://drive.google.com/drive/folders/1zoRayCwbnTJIZ_WJSXRyR0Z5-BThec8X" className="text-2xl hover:text-[#98AFC7]">
-            考古題
+            <h2 className="title">考古題</h2>
           </Link>
         </div>
       </main>
-
     </div>
   );
 }
