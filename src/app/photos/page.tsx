@@ -10,13 +10,13 @@ export default function Home() {
         <h1>NTHU CS Website</h1>
         {/* 導航選單 */}
         <nav className="flex">
-          <Link href="/" className="text-[#4D4D5C]">
+          <Link href="/" className="hover:text-[#4D4D5C]">
             HOME
           </Link>
           <Link href="/resources" className="hover:text-[#4D4D5C]">
             RESOURCES
           </Link>
-          <Link href="/photos" className="hover:text-[#4D4D5C]">
+          <Link href="/photos" className="text-[#4D4D5C]">
             PHOTOS
           </Link>
         </nav>

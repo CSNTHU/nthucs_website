@@ -45,5 +45,11 @@ header {
   font-size: 36px;
 }
 
+header nav {
+  display: flex;       /* flex container */
+  margin-left: auto;   /* 推到最右 */
+  gap: 1.5rem;         /* 在每個項目間產生 24px 間距 */
+}
+
 /* 4. Tailwind 的全部 utility classes */
 @import "tailwindcss/utilities";
