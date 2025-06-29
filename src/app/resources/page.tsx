@@ -9,17 +9,22 @@ export default function Home() {
   return (
     <div>
       {/* 上方橫幅 */}
-      <header>
-        <h1>NTHU CS Website</h1>
-        {/* 導航選單 */}
-        <nav className="flex">
-          <Link href="/" className="hover:text-[#4D4D5C]">
+      <header
+        className="
+          flex items-center justify-between
+          py-8 px-8
+          bg-[var(--banner-bg)] text-[var(--banner-text)]
+        "
+      >
+        <h1 className="text-3xl font-bold">NTHU CS Website</h1>
+        <nav className="flex gap-6">
+          <Link href="/" className="text-[var(--banner-text)] hover:text-[#4D4D5C]">
             HOME
           </Link>
-          <Link href="/resources" className="text-[#4D4D5C]">
+          <Link href="/resources" className="text-[var(--banner-text)] hover:text-[#4D4D5C]">
             RESOURCES
           </Link>
-          <Link href="/photos" className="hover:text-[#4D4D5C]">
+          <Link href="/photos" className="text-[var(--banner-text)] hover:text-[#4D4D5C]">
             PHOTOS
           </Link>
         </nav>
